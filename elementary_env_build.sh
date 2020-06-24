@@ -1,10 +1,12 @@
 # dev env build, elementary os hera
+# inspired heavily by https://github.com/aditya7iyengar/adify
 
 ELIXIR_VERSION="1.10.3"
 ERLANG_VERSION="23.0.1"
 RUBY_VERSION="2.7.1"
 RAILS_VERSION="6.0.3.2"
 ASDF_VERSION="0.7.8"
+NODEJS_VERSION="12.18.1"
 
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
@@ -45,10 +47,14 @@ sudo apt -y update
  _announce_step "Upgrade all packages"
 sudo apt -y full-upgrade
 
-# necessary to build erlang 
 # https://github.com/asdf-vm/asdf-erlang#ubuntu-1604-lts-xenial-xerus
  _announce_step "Installing Eerlang Dependencies"
 sudo apt -y install build-essential autoconf m4 libncurses5-dev libwxgtk3.0-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop
+
+# https://github.com/asdf-vm/asdf-nodejs#linux-debian
+ _announce_step "Installing NodeJS Dependencies"
+sudo apt -y install dirmngr gpg
+bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
 
  _announce_step "Installing git"
 sudo apt -y install git-all
@@ -93,6 +99,19 @@ _announce_step "Setting Global Elixir to ${ELIXIR_VERSION}"
 . ${HOME}/.asdf/completions/asdf.bash
 asdf global elixir ${ELIXIR_VERSION}
 _announce_success "Successfully set global elixir to ${ELIXIR_VERSION}"
+
+_announce_step "Installing Node ${NODEJS_VERSION}"
+asdf plugin-add nodejs
+. ${HOME}/.asdf/asdf.sh
+. ${HOME}/.asdf/completions/asdf.bash
+asdf install nodejs ${NODEJS_VERSION}
+_announce_success "Successfully install nodejs: ${NODEJS_VERSION}"
+
+_announce_step "Setting Global Node to ${NODEJS_VERSION}"
+. ${HOME}/.asdf/asdf.sh
+. ${HOME}/.asdf/completions/asdf.bash
+asdf global nodejs ${NODEJS_VERSION}
+_announce_success "Successfully set global nodejs to ${NODEJS_VERSION}"
 
 _announce_step "Installing Ruby ${RUBY_VERSION}"
 asdf plugin-add ruby
