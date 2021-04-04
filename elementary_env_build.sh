@@ -276,6 +276,9 @@ RUBY_CONFIGURE_OPTS="--disable-dtrace --disable-install-rdoc" asdf install ruby 
 . ${HOME}/.asdf/completions/asdf.bash
 asdf global ruby ${RUBY_VERSION}
 
+asdf plugin-add yarn
+asdf install yarn latest
+
 # Disable rdoc for ruby gems"
 echo "gem: --no-ri --no-rdoc --no-document" > ~/.gemrc
 
