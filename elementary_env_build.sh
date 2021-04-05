@@ -105,7 +105,7 @@ sudo apt install mysql-client libmysqlclient-dev libsqlite3-dev
 # git
 sudo apt -y install git-all
 git config --global user.email "seanbjornsson@gmail.com"
-git config --global user.name "Sean Björnsson"
+git config --global user.name "Sean Bjornsson"
 git config --global core.editor vim
 
 # tig
